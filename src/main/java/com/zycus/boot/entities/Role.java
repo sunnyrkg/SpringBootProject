@@ -12,5 +12,4 @@ public class Role {
 	@GeneratedValue
 	private Integer id;
 	private String roleName;
-	private int level;
 }	
