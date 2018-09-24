@@ -22,10 +22,8 @@ public class Launcher {
 	{//this is 
 		SpringApplication.run(Launcher.class, arg);
 		//this is by akshay
-	}
-	@Bean
-	public ObjectMapper mapper() {
-	  return new ObjectMapper();
+		//Changed by risabh.gupta
+		
 	}
 }
 
