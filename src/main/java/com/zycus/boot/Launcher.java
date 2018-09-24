@@ -21,6 +21,7 @@ public class Launcher {
 	public static void main(String...arg)
 	{//this is 
 		SpringApplication.run(Launcher.class, arg);
+		//this is by akshay
 	}
 	@Bean
 	public ObjectMapper mapper() {
