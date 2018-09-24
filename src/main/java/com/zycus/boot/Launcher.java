@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableCaching
 public class Launcher {
 	public static void main(String...arg)
-	{
+	{//this is 
 		SpringApplication.run(Launcher.class, arg);
 		//Changed by risabh.gupta
 	}
