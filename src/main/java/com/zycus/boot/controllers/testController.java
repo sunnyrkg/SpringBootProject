@@ -1,9 +1,11 @@
 package com.zycus.boot.controllers;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import com.zycus.boot.entities.User;
 import com.zycus.boot.repositories.SkillRepository;
 import com.zycus.boot.repositories.UserRepository;
 import com.zycus.boot.services.DepartmentService;
+import com.zycus.boot.services.DesignationService;
 import com.zycus.boot.services.SkillService;
 import com.zycus.boot.services.UserService;
 
@@ -28,15 +31,18 @@ public class testController {
 	SkillService skillService;
 	@Autowired
 	DepartmentService departmentService;
+	@Autowired
+	DesignationService designationService;
 	@RequestMapping(path="/userservice",produces="text/plain")
 	public @ResponseBody String testUserService()
 	{
-		List<String> departments = new LinkedList<>();
-		departments.add("Management");
-		departments.add("Social");
-		departments.add("Security");
-		departments.add("Technical");
-		departmentService.addAllDepartment(departments);
+		Map<String,String> designations = new HashMap<>();
+		designations.put("Social","Welfare Engineer");
+		designations.put("Social", "Responsible");
+		designations.put("Pantry", "Pantry Manager");
+		designations.forEach((department,designation)->{
+			designationService.createNewDesignation(designation, department);
+		});
 		return "Executed";
 	}
 

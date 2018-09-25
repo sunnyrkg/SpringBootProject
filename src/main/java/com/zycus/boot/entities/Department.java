@@ -16,6 +16,7 @@ public class Department {
 	@GeneratedValue
 	private Long id;
 	private String departmentName;
+	
 	@OneToMany(mappedBy="department",fetch=FetchType.EAGER)
 	private Set<Designation> designations;
 	public Long getId() {

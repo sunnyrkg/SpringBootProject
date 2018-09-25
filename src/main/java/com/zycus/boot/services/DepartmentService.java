@@ -34,9 +34,12 @@ public class DepartmentService {
 		List<Department> departments = new LinkedList<>();
 		for(String departmentName : departmentNames)
 		{
-			Department department = new Department();
-			department.setDepartmentName(departmentName);
-			departments.add(department);
+			if(departmentRepository.countByName(departmentName)<1)
+			{
+				Department department = new Department();
+				department.setDepartmentName(departmentName);
+				departments.add(department);
+			}
 		}
 		return departmentRepository.saveAll(departments);
 	}
