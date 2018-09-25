@@ -1,5 +1,6 @@
 package com.zycus.boot.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Skill {
+public class Skill implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -19,6 +20,14 @@ public class Skill {
 	@ManyToMany
 	@JoinColumn(name="users")
 	private Set<User> users;
+	public Skill()
+	{
+		//Default Constructor for Jackson
+	}
+	public Skill(String skillName) {
+		// TODO Auto-generated constructor stub
+		this.skillName = skillName;
+	}
 	public Long getId() {
 		return id;
 	}

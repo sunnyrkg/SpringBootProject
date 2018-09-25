@@ -1,5 +1,6 @@
 package com.zycus.boot.entities;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -58,6 +59,19 @@ public class User {
 	public void setSkills(Set<Skill> skills) {
 		this.skills = skills;
 	}
+	public boolean containsSkill(Object o) {
+		return skills.contains(o);
+	}
+	public boolean addSkill(Skill e) {
+		return skills.add(e);
+	}
+	public boolean containsAllSkills(Collection<?> c) {
+		return skills.containsAll(c);
+	}
+	public boolean addAllSkills(Collection<? extends Skill> c) {
+		return skills.addAll(c);
+	}
+	
 	
 	
 }
