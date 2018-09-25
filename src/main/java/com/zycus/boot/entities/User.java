@@ -1,6 +1,7 @@
 package com.zycus.boot.entities;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -63,6 +64,10 @@ public class User {
 		return skills.contains(o);
 	}
 	public boolean addSkill(Skill e) {
+		if(this.skills==null)
+		{
+			this.skills = new HashSet<>();
+		}
 		return skills.add(e);
 	}
 	public boolean containsAllSkills(Collection<?> c) {

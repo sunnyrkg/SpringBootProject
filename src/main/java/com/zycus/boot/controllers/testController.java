@@ -36,13 +36,12 @@ public class testController {
 	@RequestMapping(path="/userservice",produces="text/plain")
 	public @ResponseBody String testUserService()
 	{
-		Map<String,String> designations = new HashMap<>();
-		designations.put("Social","Welfare Engineer");
-		designations.put("Social", "Responsible");
-		designations.put("Pantry", "Pantry Manager");
-		designations.forEach((department,designation)->{
-			designationService.createNewDesignation(designation, department);
-		});
+		User user = new User();
+		user.setFirstName("Puneet");
+		user.setLastName("Gupta");
+		user.addSkill(skillService.findByNameIfNotExistCreatItAndReturnInstanceOfIt("CPP"));
+		user.addSkill(skillService.findByNameIfNotExistCreatItAndReturnInstanceOfIt("C"));
+		userService.addNewPanel(user);
 		return "Executed";
 	}
 
