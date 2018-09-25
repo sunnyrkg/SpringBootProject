@@ -3,10 +3,12 @@ package com.zycus.boot.services;
 import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.zycus.boot.entities.Skill;
 import com.zycus.boot.repositories.SkillRepository;
 
+@Service
 public class SkillService {
 	@Autowired
 	SkillRepository skillRepository;

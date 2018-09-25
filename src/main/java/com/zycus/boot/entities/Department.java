@@ -3,6 +3,7 @@ package com.zycus.boot.entities;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -15,8 +16,8 @@ public class Department {
 	@GeneratedValue
 	private Long id;
 	private String departmentName;
-	@OneToMany(mappedBy="departments")
-	private Set<Department> departments;
+	@OneToMany(mappedBy="department",fetch=FetchType.EAGER)
+	private Set<Designation> designations;
 	public Long getId() {
 		return id;
 	}
@@ -29,11 +30,11 @@ public class Department {
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
 	}
-	public Set<Department> getDepartments() {
-		return departments;
+	public Set<Designation> getDesignations() {
+		return designations;
 	}
-	public void setDepartments(Set<Department> departments) {
-		this.departments = departments;
+	public void setDesignations(Set<Designation> designations) {
+		this.designations = designations;
 	}
 	
 	

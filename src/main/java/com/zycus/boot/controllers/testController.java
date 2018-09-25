@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zycus.boot.entities.Skill;
 import com.zycus.boot.entities.User;
 import com.zycus.boot.repositories.SkillRepository;
+import com.zycus.boot.repositories.UserRepository;
+import com.zycus.boot.services.DepartmentService;
+import com.zycus.boot.services.SkillService;
 import com.zycus.boot.services.UserService;
 
 @Controller
@@ -22,24 +25,18 @@ public class testController {
 	@Autowired
 	UserService userService;
 	@Autowired
-	SkillRepository skillRepository;
+	SkillService skillService;
+	@Autowired
+	DepartmentService departmentService;
 	@RequestMapping(path="/userservice",produces="text/plain")
 	public @ResponseBody String testUserService()
 	{
-		User user = new User();
-		user.setFirstName("Aman");
-		user.setLastName("Gupta");
-		List<String> skillNames = new LinkedList<>();
-		skillNames.add("JAVA");
-		skillNames.add("C");
-		skillNames.add("MATH");
-		Iterable<Skill> skills = skillRepository.findByName(skillNames);
-		Iterator<Skill> skillIterator = skills.iterator();
-		user.setSkills(new HashSet<>());
-		while(skillIterator.hasNext())
-		{
-			user.addSkill(skillIterator.next());
-		}
+		List<String> departments = new LinkedList<>();
+		departments.add("Management");
+		departments.add("Social");
+		departments.add("Security");
+		departments.add("Technical");
+		departmentService.addAllDepartment(departments);
 		return "Executed";
 	}
 

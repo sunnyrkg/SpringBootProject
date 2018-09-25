@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Skill implements Serializable {
+public class Skill{
 	@Id
 	@GeneratedValue
 	private Long id;
