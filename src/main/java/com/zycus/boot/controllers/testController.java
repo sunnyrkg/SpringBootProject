@@ -1,6 +1,7 @@
 package com.zycus.boot.controllers;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -28,23 +29,17 @@ public class testController {
 		User user = new User();
 		user.setFirstName("Aman");
 		user.setLastName("Gupta");
-		Set<Skill> inputSkills = new HashSet<>();
-		List<String> skill = new LinkedList<>();
-		skill.add("JAVA");
-		skill.add("C");
-		skill.add("MATH");
-		/*Skill skillExist;
-		inputSkills.stream().forEach((skill)->{
-			if((skillExist = skillRepository.findByName(skill.getSkillName()))!=null)
-			{
-				skill = s;
-				
-			}
-		});*/
-		user.setSkills(new HashSet<Skill>());
-		user.addSkill(new Skill("JAVA"));
-		user.addSkill(new Skill("C"));
-		userService.addNewHR(user);
+		List<String> skillNames = new LinkedList<>();
+		skillNames.add("JAVA");
+		skillNames.add("C");
+		skillNames.add("MATH");
+		Iterable<Skill> skills = skillRepository.findByName(skillNames);
+		Iterator<Skill> skillIterator = skills.iterator();
+		user.setSkills(new HashSet<>());
+		while(skillIterator.hasNext())
+		{
+			user.addSkill(skillIterator.next());
+		}
 		return "Executed";
 	}
 
