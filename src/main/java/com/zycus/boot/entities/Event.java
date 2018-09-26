@@ -34,6 +34,14 @@ public class Event {
 	@JoinColumn(name="designationRequiredForPanel")
 	private Designation designationRequiredForPanel;
 	
+	public Designation getDesignationRequiredForPanel() {
+		return designationRequiredForPanel;
+	}
+
+	public void setDesignationRequiredForPanel(Designation designationRequiredForPanel) {
+		this.designationRequiredForPanel = designationRequiredForPanel;
+	}
+
 	@Enumerated(EnumType.STRING)
 	private EventStatus eventStatus;
 
@@ -45,6 +53,18 @@ public class Event {
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "assignedPanelMembers")
 	private Set<User> assignedPanelMembers;
+	
+	@ManyToMany
+	@JoinColumn(name = "skillSetRequired")
+	private Set<Skill> skillSetRequired;
+
+	public Set<Skill> getSkillSetRequired() {
+		return skillSetRequired;
+	}
+
+	public void setSkillSetRequired(Set<Skill> skillSetRequired) {
+		this.skillSetRequired = skillSetRequired;
+	}
 
 	public Set<User> getAssignedPanelMembers() {
 		return assignedPanelMembers;
