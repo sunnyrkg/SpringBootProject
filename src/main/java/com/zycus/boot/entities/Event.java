@@ -3,7 +3,6 @@ package com.zycus.boot.entities;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.zycus.enums.EventStatus;
@@ -29,6 +29,18 @@ public class Event {
 	private Date esclationTime;
 	private int numberOfPanelsRequired;
 	private int numberOfPanels;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="designationRequiredForPanel")
+	private Designation designationRequiredForPanel;
+	
+	public Designation getDesignationRequiredForPanel() {
+		return designationRequiredForPanel;
+	}
+
+	public void setDesignationRequiredForPanel(Designation designationRequiredForPanel) {
+		this.designationRequiredForPanel = designationRequiredForPanel;
+	}
 
 	@Enumerated(EnumType.STRING)
 	private EventStatus eventStatus;
@@ -37,15 +49,22 @@ public class Event {
 	@JoinColumn(name = "raisedBy")
 	private User raisedBy;
 
-	@ManyToMany
-	@JoinColumn(name="panelMembers")
-	private Set<User> panelMembers;
-	
 
-
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "userId")
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "assignedPanelMembers")
 	private Set<User> assignedPanelMembers;
+	
+	@ManyToMany
+	@JoinColumn(name = "skillSetRequired")
+	private Set<Skill> skillSetRequired;
+
+	public Set<Skill> getSkillSetRequired() {
+		return skillSetRequired;
+	}
+
+	public void setSkillSetRequired(Set<Skill> skillSetRequired) {
+		this.skillSetRequired = skillSetRequired;
+	}
 
 	public Set<User> getAssignedPanelMembers() {
 		return assignedPanelMembers;

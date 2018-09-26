@@ -31,13 +31,8 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "skill")
 	private Set<Skill> skills;
-
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinColumn(name="eventParticipated")
-	private Set<Event> eventParticipated;
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "event_id")
 	private Set<Event> assignedEvents;
 
