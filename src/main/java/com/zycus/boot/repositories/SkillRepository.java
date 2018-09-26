@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.zycus.boot.entities.Skill;
 
 @Repository
-public interface SkillRepository extends CrudRepository<Skill, Long> {
+public interface SkillRepository extends CrudRepository<Skill, Integer> {
 	
 	@Query("SELECT S FROM Skill S WHERE S.skillName IN :skillNameList")
 	public Iterable<Skill> findByName(@Param("skillNameList") List<String> skillName);

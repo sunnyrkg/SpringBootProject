@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.zycus.boot.entities.Designation;
 
 @Repository
-public interface DesignationRepository extends CrudRepository<Designation, Long> {
+public interface DesignationRepository extends CrudRepository<Designation, Integer> {
 
 	@Query("SELECT D FROM Designation D WHERE D.designationName = :designationName")
 	public Iterable<Designation> findByName(@Param("designationName") String designationName);

@@ -62,7 +62,7 @@ public class testController {
 		event.setEventName("RECRUITMENT OF JAVA IIIT");
 		event.setEventStatus(EventStatus.DRAFT);
 		event.setNumberOfPanelsRequired(5);
-		event.setRaisedBy(userService.getUserById(7L));
+		event.setRaisedBy(userService.getUserById(7));
 		event.setSkillSetRequired(new HashSet<>());
 		event.getSkillSetRequired().addAll(skillService.findByNamesIfNotExistCreateItAndReturnIterableOfIt("JAVA","C","MATH","APTITUDE"));
 		event.setDesignationRequiredForPanel(designationService.getDesignationByName("Pantry Manager"));

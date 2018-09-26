@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Skill{
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	private String skillName;
 	@ManyToMany
 	@JoinColumn(name="users")
@@ -28,10 +28,10 @@ public class Skill{
 		// TODO Auto-generated constructor stub
 		this.skillName = skillName;
 	}
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getSkillName() {

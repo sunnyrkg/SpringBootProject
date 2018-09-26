@@ -12,17 +12,17 @@ import javax.persistence.Table;
 public class Designation {
 	@Id
 	@GeneratedValue
-	private Long designationId;
+	private Integer designationId;
 	private String designationName;
 	@ManyToOne
 	@JoinColumn(name = "department")
 	private Department department;
 
-	public Long getDesignationId() {
+	public Integer getDesignationId() {
 		return designationId;
 	}
 
-	public void setDesignationId(Long designationId) {
+	public void setDesignationId(Integer designationId) {
 		this.designationId = designationId;
 	}
 

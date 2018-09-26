@@ -12,7 +12,7 @@ import com.zycus.boot.entities.User;
 import com.zycus.enums.EventStatus;
 
 @Repository
-public interface EventRepository extends CrudRepository<Event, Long> {
+public interface EventRepository extends CrudRepository<Event, Integer> {
 	
 	@Query("SELECT e FROM Event e WHERE e.eventName = :eventName")
 	public Iterable<Event> findEventByName(@Param("eventName") String eventName);

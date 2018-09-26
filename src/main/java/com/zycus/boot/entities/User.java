@@ -21,7 +21,7 @@ import com.zycus.enums.UserRole;
 public class User {
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	private String firstName;
 	private String lastName;
 
@@ -44,11 +44,11 @@ public class User {
 		this.assignedEvents = assignedEvents;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

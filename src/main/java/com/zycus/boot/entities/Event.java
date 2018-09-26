@@ -22,7 +22,7 @@ import com.zycus.enums.EventStatus;
 public class Event {
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	private String eventName;
 	private Date eventTime;
 	private Date raisedTime;
@@ -75,11 +75,11 @@ public class Event {
 	}
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -8,7 +8,7 @@ import com.zycus.boot.entities.User;
 import com.zycus.enums.UserRole;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	@Query("SELECT c FROM User c WHERE c.role = :userRole")
 	Iterable<User> findUserByRole(@Param("userRole") UserRole userRole);

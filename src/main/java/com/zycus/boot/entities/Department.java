@@ -14,17 +14,17 @@ import javax.persistence.Table;
 public class Department {
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Integer id;
 	private String departmentName;
 
 	@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
 	private Set<Designation> designations;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
