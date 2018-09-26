@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zycus.boot.entities.Event;
+import com.zycus.boot.entities.User;
 import com.zycus.boot.repositories.EventRepository;
 import com.zycus.enums.EventStatus;
+import com.zycus.enums.UserRole;
 
 @Service
 public class EventService {
@@ -53,14 +55,22 @@ public class EventService {
 		eventRepository.deleteById(id);
 	}
 	
-	public Event updateEventStatus(Long eventId,EventStatus eventStatus) 
+	public Event updateEventStatus(Event event,EventStatus eventStatus) 
 	{
-		return eventRepository;
+		event.setEventStatus(eventStatus);
+		eventRepository.save(event);-
 	}
 
-	public void assignHR()
+	public boolean assignHRToEvent(Event event,User raisedBy)
 	{
-		
+		if(raisedBy.getRole()==UserRole.HR)
+		{
+			event.setRaisedBy(raisedBy);
+			eventRepository.save(event);
+			return true;
+		}
+		else
+			return false;
 	}
 	public Event findEventById(Long id)
 	{
