@@ -17,7 +17,7 @@ public class Department {
 	private Integer id;
 	private String departmentName;
 
-	@OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "department")
 	private Set<Designation> designations;
 
 	public Integer getId() {

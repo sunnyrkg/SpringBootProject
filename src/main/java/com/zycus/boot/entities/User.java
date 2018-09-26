@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zycus.enums.UserRole;
 
 @Entity
@@ -28,11 +29,12 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "skill")
 	private Set<Skill> skills;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "event_id")
 	private Set<Event> assignedEvents;
 
