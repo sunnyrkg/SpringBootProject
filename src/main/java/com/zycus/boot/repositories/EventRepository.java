@@ -1,5 +1,6 @@
 package com.zycus.boot.repositories;
 
+import org.springframework.data.jpa.repository.Query;
 import java.util.Date;
 
 import org.springframework.data.jpa.repository.Query;
