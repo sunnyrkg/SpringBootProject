@@ -57,6 +57,10 @@ public class testController {
 	public @ResponseBody String testEventServices()
 	{
 		Event event = new Event();
+		User user = new User();
+		user.setFirstName("Aditya");
+		user.setLastName("Naidu");
+		
 		event.setEventTime(new Date());
 		event.setRaisedTime(new Date());
 		event.setEventName("RECRUITMENT OF JAVA IIIT");
