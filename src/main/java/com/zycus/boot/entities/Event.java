@@ -38,7 +38,7 @@ public class Event {
 	private User raisedBy;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userId")
 	private Set<User> assignedPanelMembers;
 
 	public Set<User> getAssignedPanelMembers() {
