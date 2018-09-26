@@ -26,9 +26,15 @@ public class User {
 	private String lastName;
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
+	
 	@ManyToMany(fetch=FetchType.EAGER,cascade=CascadeType.PERSIST)
 	@JoinColumn(name="skill")
 	private Set<Skill> skills;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="eventParticipated")
+	private Set<Event> eventParticipated;
+	
 	public Long getId() {
 		return id;
 	}

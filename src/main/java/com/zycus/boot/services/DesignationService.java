@@ -1,12 +1,10 @@
 package com.zycus.boot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.zycus.boot.entities.Department;
 import com.zycus.boot.entities.Designation;
-import com.zycus.boot.repositories.DepartmentRepository;
 import com.zycus.boot.repositories.DesignationRepository;
 
 @Service
