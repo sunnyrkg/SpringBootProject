@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+  <head th:insert="include">
+  </head>
+  <head>
+    <title>Dashboard - Admin</title>
+  </head>
+  <body ng-app="myApp">
+    <div class="row" ng-controller="adminDetailsController">
+      <div class="text-center">
+        <h1>Logged in admin: {{admin.name}}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-push-3">
+          <div class="row custom-padding">
+            <a th:href=@{/bankingService/openAccount}>
+              <button class="btn btn-primary btn-lg">Open Account</button>
+            </a>
+          </div>
+          <div class="row custom-padding">
+            <a th:href=@{/bankingService/viewAccount}>
+              <button class="btn btn-primary btn-lg">View Accounts</button>
+            </a>
+          </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    var myApp = angular.module("myApp",[]);
+    myApp.controller("adminDetailsController",function($scope,$http)
+    {
+      $http.get("/restful-data-controller/logged-in-admin").then(function(response)
+      {
+        $scope.admin = response.data;
+        console.log($scope.admin);
+      });
+    });
+  </script>
+</html>

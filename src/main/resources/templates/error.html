@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="include"></head>
+<head>
+<meta charset="UTF-8"/>
+<title>Error</title>
+<link href="/css/errorPage.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="row">
+        <div class="col-md-10 col-md-push-1">
+            <div class="w3-red w3-text-white w3-card-4 custom-padding">
+            <h1 class="w3-text-shadow">ERROR!!!</h1>
+                <div th:each="error : ${errorList}">  
+                    <h2 th:text=${error}></h2>
+                </div>
+            </div>       
+        </div>
+    </div>
+</body>
+</html>
