@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Skill{
@@ -17,6 +19,7 @@ public class Skill{
 	@GeneratedValue
 	private Integer id;
 	private String skillName;
+	@JsonIgnore
 	@ManyToMany
 	@JoinColumn(name="users")
 	private Set<User> users;

@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.zycus.enums.EventStatus;
 
 @Entity
@@ -30,7 +31,7 @@ public class Event {
 	private int numberOfPanelsRequired;
 	private int numberOfPanels;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne
 	@JoinColumn(name="designationRequiredForPanel")
 	private Designation designationRequiredForPanel;
 	
@@ -49,8 +50,7 @@ public class Event {
 	@JoinColumn(name = "raisedBy")
 	private User raisedBy;
 
-
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
 	@JoinColumn(name = "assignedPanelMembers")
 	private Set<User> assignedPanelMembers;
 	

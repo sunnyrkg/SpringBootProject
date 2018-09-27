@@ -2,6 +2,7 @@ package com.zycus.boot.services;
 
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +25,11 @@ public class EventService {
 	public Event createNewEvent(Event event)
 	{
 		return eventRepository.save(event);
+	}
+	
+	public Event findEventById(Integer eventId)
+	{
+		return eventRepository.findById(eventId).get();
 	}
 	
 	public Iterable<Event> getEventsByName(String name)
@@ -50,17 +56,47 @@ public class EventService {
 		
 	}
 	
-	public void deleteEventById(Long id)
+	public void deleteEventById(Integer eventId)
 	{
-		eventRepository.deleteById(id);
+		eventRepository.deleteById(eventId);
 	}
 	
 	public Event updateEventStatus(Event event,EventStatus eventStatus) 
 	{
 		event.setEventStatus(eventStatus);
-		eventRepository.save(event);
+		return eventRepository.save(event);
 	}
-
+	public Event publishEvent(Event event)
+	{
+		return this.updateEventStatus(event, EventStatus.PUBLISHED);
+	}
+	public Event addPanelToEvent(Event event,User...users)
+	{
+		Set<User> userSet = new HashSet<>();
+		for(User user : users)
+		{
+			if(user.getRole()==UserRole.PANEL)
+			{
+				userSet.add(user);
+				event.setNumberOfPanels(event.getNumberOfPanels()+1);
+			}
+		}
+		event.getAssignedPanelMembers().addAll(userSet);
+		return eventRepository.save(event);
+	}
+	public Event removePanelFromEvent(Event event, User...users)
+	{
+		Set<User> userSet = new HashSet<>();
+		Set<User> assignedPanelMembers = event.getAssignedPanelMembers();
+		for(User user : users)
+		{
+			if(user.getRole()==UserRole.PANEL)
+				userSet.add(user);
+		}
+		assignedPanelMembers.removeAll(userSet);
+		event.setNumberOfPanels(assignedPanelMembers.size());
+		return eventRepository.save(event);
+	}
 	public boolean assignHRToEvent(Event event,User raisedBy)
 	{
 		if(raisedBy.getRole()==UserRole.HR)
@@ -72,29 +108,5 @@ public class EventService {
 		else
 			return false;
 	}
-	public Event findEventById(Long id)
-	{
-		return eventRepository.findById(id).get();
-	}
-	
-	
-	public Set<Event> findAllEventsBeforeDate(Date date)
-	{
-		
-	}
-	
-	public Set<Event> findAllEventsAfterDate(Date date)
-	{
-		
-	}
-
-	public Set<Event> 
-	
-	
-	
-	
-	
-	
-	
 	
 }
