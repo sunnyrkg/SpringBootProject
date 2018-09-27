@@ -1,28 +1,68 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head th:insert="include"></head>
+<html>
 <head>
-<meta charset="UTF-8"/>
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/home.css">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	  "use strict";
+	  var options = {};
+	  options.ui = {
+	    container: "#pwd-container",
+	    showVerdictsInsideProgressBar: true,
+	    viewports: {
+	      progress: ".pwstrength_viewport_progress"
+	    }
+	  };
+	  options.common = {
+	    debug: true,
+	    onLoad: function() {
+	      $('#messages').text('Start typing password');
+	    }
+	  };
+	  $(':password').pwstrength(options);
+	});</script>
 </head>
+
 <body>
-	<div class="row">
-            <div class="col-sm-4 w3-margin-left w3-margin-top">
-                  <form class="form-vertical" action="/authentication/login" method="POST">
-                        <div class="form-group">
-                              <label for="username">Username: </label>
-                              <input type="text" class="form-control" name="username">
-                        </div>
-                        <div class="form-group">
-                              <label for="password">Password: </label>
-                              <input type="password" class="form-control" name="password">
-                        </div>
-                        <div class="form-group">
-                              <input type="submit" value="Log In" class="btn btn-lg btn-success"/>
-                        </div>
-                  </form>
-            </div>
+<div class="container">
+  
+  <div class="row" id="pwd-container">
+    <div class="col-md-4"></div>
+    
+    <div class="col-md-4">
+      <section class="login-form">
+        <form method="post" action="#" role="login">
+          <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+          <input type="email" name="email" placeholder="Email" required class="form-control input-lg" value="joestudent@gmail.com" />
+          
+          <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+          
+          
+          <div class="pwstrength_viewport_progress"></div>
+          
+          
+          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
+          <div>
+            <a href="#">Create account</a> or <a href="#">reset password</a>
+          </div>
+          
+        </form>
+        
+        <div class="form-links">
+          <a href="#">www.website.com</a>
+        </div>
+      </section>  
       </div>
+      
+      <div class="col-md-4"></div>
+      
+
+  </div>
 </body>
 </html>
