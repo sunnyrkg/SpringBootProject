@@ -53,5 +53,11 @@ public class testController {
 		Event event = eventService.findEventById(16);
 		return eventService.removePanelFromEvent(event, userService.getUserById(6));
 	}
+	
+	@RequestMapping(path="/user-login")
+	public String goToLogin()
+	{
+		return "login";
+	}
 
 }

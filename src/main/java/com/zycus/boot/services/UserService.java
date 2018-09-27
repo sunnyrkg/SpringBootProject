@@ -1,6 +1,7 @@
 package com.zycus.boot.services;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,13 @@ public class UserService {
 	
 	public User getUserById(Integer id)
 	{
-		return userRepository.findById(id).get();
+		try {
+				return userRepository.findById(id).get();
+		}
+		catch(NoSuchElementException e)
+		{
+			return null;
+		}
 	}
 	
 	public Iterable<User> getUserByRole(UserRole userRole)

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ import com.zycus.boot.services.EventService;
 import com.zycus.boot.services.LoginService;
 import com.zycus.boot.services.SkillService;
 import com.zycus.boot.services.UserService;
+import com.zycus.enums.UserRole;
 
 @Controller
 @RequestMapping(path="/HRMS")
@@ -45,7 +47,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(path = "/log-in",method=RequestMethod.POST)
-	public String logIn(HttpServletRequest httpServletRequest)
+	public String logIn(HttpServletRequest httpServletRequest,Model model)
 	{
 		Integer id = Integer.parseInt(httpServletRequest.getParameter("username"));
 		String password = httpServletRequest.getParameter("password");
@@ -54,7 +56,8 @@ public class MainController {
 			System.out.println("Authentication Successful");
 			User user = userService.getUserById(id);
 			loginService.setSessionFor(user, httpServletRequest.getSession());
-			return moveToDashboard(user);
+			model.addAttribute("user",user);
+			return moveToDashboard(user,model);
 		}
 		else
 		{
@@ -63,9 +66,14 @@ public class MainController {
 			
 		}
 	}
-	public String moveToDashboard(User user)
+	public String moveToDashboard(User user,Model model)
 	{
-		return "dashboard/home";
+		if(user.getRole().equals(UserRole.HR))
+		return "dashboard/hr";
+		if(user.getRole().equals(UserRole.PANEL))
+		return "dashboard/panel";
+		else
+		return "error";
 	}
 	public String moveToPage(String page)
 	{
