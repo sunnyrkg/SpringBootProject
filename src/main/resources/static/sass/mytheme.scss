@@ -1,0 +1,30 @@
+@import "assets/stylesheets/_bootstrap.scss";
+.custom
+{
+    &-padding
+    {
+        &-left
+        {
+            padding-left: 20px;
+        }
+        &-right
+        {
+            padding-right: 20px;
+        }
+        padding: 20px;
+    }
+    &-no
+    {
+        &-margin{margin: 0px;}
+    }
+}
+#idea
+{
+    text-align: center;
+    padding: '20px';
+    margin: '20px';
+}
+.row
+{
+    @extend .custom-no-margin;
+}

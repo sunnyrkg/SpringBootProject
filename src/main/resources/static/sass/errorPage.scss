@@ -1,0 +1,6 @@
+@import "assets/stylesheets/_bootstrap.scss";
+@import "w3/w3.scss";
+body
+{
+    @extend .w3-padding-16;
+}
