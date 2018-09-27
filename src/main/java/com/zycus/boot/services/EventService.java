@@ -58,7 +58,7 @@ public class EventService {
 	public Event updateEventStatus(Event event,EventStatus eventStatus) 
 	{
 		event.setEventStatus(eventStatus);
-		eventRepository.save(event);-
+		eventRepository.save(event);
 	}
 
 	public boolean assignHRToEvent(Event event,User raisedBy)
