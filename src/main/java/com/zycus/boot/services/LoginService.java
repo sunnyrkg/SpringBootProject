@@ -23,6 +23,13 @@ public class LoginService {
 	}
 	public void setSessionFor(User user,HttpSession httpSession)
 	{
+		System.out.println(user.getId() +" is set in session id "+httpSession.getId());
 		httpSession.setAttribute("loggedIn",user);
+	}
+	public User getLoggedInUser(HttpSession httpSession)
+	{
+		User user = (User) httpSession.getAttribute("loggedIn");
+		System.out.println(user.getId() +" is get from session id "+httpSession.getId());
+		return user;
 	}
 }
