@@ -25,6 +25,15 @@ public class User {
 	private Integer id;
 	private String firstName;
 	private String lastName;
+	private String password;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	@Enumerated(EnumType.STRING)
 	private UserRole role;

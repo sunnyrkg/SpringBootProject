@@ -1,16 +1,24 @@
 package com.zycus.boot.controllers;
 
+import java.net.Authenticator.RequestorType;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zycus.boot.entities.Event;
+import com.zycus.boot.entities.User;
 import com.zycus.boot.services.DepartmentService;
 import com.zycus.boot.services.DesignationService;
 import com.zycus.boot.services.EventService;
+import com.zycus.boot.services.LoginService;
 import com.zycus.boot.services.SkillService;
 import com.zycus.boot.services.UserService;
 
@@ -27,31 +35,41 @@ public class MainController {
 	DesignationService designationService;
 	@Autowired
 	EventService eventService;
-	@RequestMapping(path="/userservice",produces="text/plain")
-	public @ResponseBody String testUserService()
+	@Autowired
+	LoginService loginService;
+	
+	@RequestMapping
+	public String testUserService()
 	{
-		Map<String,String> designations = new HashMap<>();
-		designations.put("Social","Welfare Engineer");
-		designations.put("Social", "Responsible");
-		designations.put("Pantry", "Pantry Manager");
-		designations.forEach((department,designation)->{
-			designationService.createNewDesignation(designation, department);
-		});
-		return "Executed";
+		return "home";
 	}
-	@RequestMapping(path="/eventservices",produces="text/plain")
-	public @ResponseBody String testEventServices()
+	
+	@RequestMapping(path = "/log-in",method=RequestMethod.POST)
+	public String logIn(HttpServletRequest httpServletRequest)
 	{
-		Event event = eventService.findEventById(16);
-		eventService.addPanelToEvent(event,userService.getUserById(4),userService.getUserById(6));
-		return "Executed";
-		
+		Integer id = Integer.parseInt(httpServletRequest.getParameter("username"));
+		String password = httpServletRequest.getParameter("password");
+		if(loginService.validateUser(id, password))
+		{
+			System.out.println("Authentication Successful");
+			User user = userService.getUserById(id);
+			loginService.setSessionFor(user, httpServletRequest.getSession());
+			return moveToDashboard(user);
+		}
+		else
+		{
+			System.out.println("Authentication Failed");
+			return moveToPage("error");
+			
+		}
 	}
-	@RequestMapping(path="/out/eventservices",produces="application/json")
-	public @ResponseBody Event testEventServicesOut()
+	public String moveToDashboard(User user)
 	{
-		Event event = eventService.findEventById(16);
-		return eventService.removePanelFromEvent(event, userService.getUserById(6));
+		return "dashboard/home";
+	}
+	public String moveToPage(String page)
+	{
+		return page;
 	}
 
 }
