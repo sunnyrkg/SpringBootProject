@@ -37,7 +37,7 @@ $(document).ready(function() {
     
     <div class="col-md-4">
       <section class="login-form">
-        <form method="post" action="log-in" role="login">
+        <form method="post" role="login">
           <img src="/img/zycus.png" class="img-responsive" alt="" />
           <input type="text" name="username" placeholder="Username" required class="form-control input-lg"/>
           
@@ -53,6 +53,13 @@ $(document).ready(function() {
         
         <div class="form-links">
           <a href="#">Zycus/Internal/HRMS</a>
+        </div>
+      </section>
+      <section class="w3-margin-top" th:if="${message!=null}">
+        <div class="container">
+          <div class="col-md-6 col-md-push-3">
+            <span th:text="${message.getMessage()}"></span>
+          </div>
         </div>
       </section>  
       </div>

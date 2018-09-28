@@ -37,7 +37,8 @@ public class User {
 
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
-
+	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "skill")
 	private Set<Skill> skills;

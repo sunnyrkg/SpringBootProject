@@ -108,5 +108,32 @@ public class EventService {
 		else
 			return false;
 	}
+
+	public Iterable<Event> getEventsRaiseddBy(User raisedBy) throws Exception {
+		// TODO Auto-generated method stub
+		if(raisedBy.getRole().equals(UserRole.HR))
+		{
+			return eventRepository.findEventRaisedBy(raisedBy);
+		}
+		else throw new Exception("UserRole should be HR");
+	}
+
+	public Integer getNumberOfEventRaisedBy(User raisedBy) {
+		// TODO Auto-generated method stub
+		if(raisedBy.getRole().equals(UserRole.HR))
+		{
+			return eventRepository.findNumberOfEventRaisedBy(raisedBy);
+		}
+		else return 0;
+	}
+
+	public Integer getNumberOfDraftedEventRaisedBy(User raisedBy) {
+		// TODO Auto-generated method stub
+		if(raisedBy.getRole().equals(UserRole.HR))
+		{
+			return eventRepository.findNumberOf(raisedBy, EventStatus.DRAFT);
+		}
+		else return 0;
+	}
 	
 }

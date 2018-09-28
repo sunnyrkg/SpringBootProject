@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.zycus.boot.entities.Event;
 import com.zycus.boot.entities.User;
@@ -46,24 +50,34 @@ public class MainController {
 	@Autowired
 	LoginService loginService;
 	
-	@RequestMapping
-	public String testUserService()
+	@GetMapping("/index")
+	public ModelAndView testUserService()
 	{
-		return "home";
+		return new ModelAndView("home");
 	}
-	
-	@RequestMapping(path = "/log-in",method=RequestMethod.POST)
-	public String logIn(HttpServletRequest httpServletRequest,Model model,HttpServletResponse response)
+	@RequestMapping("sendToPage/{pageName}")
+	public void sendToPage(@PathVariable("pageName") String pageName,HttpServletResponse response)
+	{
+		try {
+			response.sendRedirect(pageName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@PostMapping(path = "/index")
+	public ModelAndView logIn(HttpServletRequest httpServletRequest,ModelAndView modelAndView,HttpServletResponse response)
 	{
 		Integer id = Integer.parseInt(httpServletRequest.getParameter("username"));
 		String password = httpServletRequest.getParameter("password");
+		Map<String, Object> model = modelAndView.getModel();
 		if(loginService.validateUser(id, password))
 		{
 			System.out.println("Authentication Successful");
 			User user = userService.getUserById(id);
 			loginService.setSessionFor(user, httpServletRequest.getSession());
-			model.addAttribute("user",user);
-			return moveToDashboard(user,model,response);
+			model.put("user",user);
+			return new ModelAndView("redirect:dashboard");
 		}
 		else
 		{
@@ -71,20 +85,23 @@ public class MainController {
 			Signal signal = new Signal();
 			signal.setMessage("Invalid Credentials Entered!");
 			signal.setStatus(Signal.FAIL);
-			model.addAttribute("message", signal);
-			return "home";
+			model.put("message", signal);
+			return new ModelAndView("home",model);
 			
 		}
 	}
-	public String moveToDashboard(User user,Model model,HttpServletResponse response)
+	
+	@RequestMapping(path="/dashboard")
+	public ModelAndView moveToDashboard(HttpServletRequest httpServletRequest)
 	{
+		User user = loginService.getLoggedInUser(httpServletRequest.getSession());
 		if(user.getRole().equals(UserRole.HR))
-		return "dashboard/hr";
+		return new ModelAndView("dashboard-user/index");
 		if(user.getRole().equals(UserRole.PANEL))
-		return "dashboard/panel";
+		return new ModelAndView("dashboard-user/index");
 		else
 		{
-			return "error";
+			return new ModelAndView("error");
 		}
 		
 	}
