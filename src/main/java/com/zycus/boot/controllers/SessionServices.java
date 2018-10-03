@@ -43,7 +43,16 @@ public class SessionServices{
 		User user = loginService.getLoggedInUser(httpServletRequest.getSession());
 		Integer numberOfEventRaised = eventService.getNumberOfEventRaisedBy(user);
 		Integer numberOfDraftedEvent = eventService.getNumberOfDraftedEventRaisedBy(user);
+		Integer numberOfPublishedEvent = eventService.getNumberOfPublishedEventRaisedBy(user);
 		map.put("numberOfEventRaised", numberOfEventRaised);
+		map.put("numberOfDraftedEvent", numberOfDraftedEvent);
+		map.put("numberOfPublishedEvent", numberOfPublishedEvent);
 		return map;
+	}
+	@RequestMapping(path="/get-raised-event-details",consumes="*", produces="application/json",method=RequestMethod.GET)
+	public @ResponseBody Iterable<Event>  getRaisedEvents(HttpServletRequest httpServletRequest,Model model) throws Exception
+	{
+		User user = loginService.getLoggedInUser(httpServletRequest.getSession());
+		return eventService.getEventsRaiseddBy(user);
 	}
 }

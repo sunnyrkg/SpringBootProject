@@ -135,5 +135,13 @@ public class EventService {
 		}
 		else return 0;
 	}
+	public Integer getNumberOfPublishedEventRaisedBy(User raisedBy)
+	{
+		if(raisedBy.getRole().equals(UserRole.HR))
+		{
+			return eventRepository.findNumberOf(raisedBy, EventStatus.PUBLISHED);
+		}
+		else return 0;
+	}
 	
 }

@@ -1,0 +1,25 @@
+<div class="w3-margin-top" ng-controller="raisedEventTableControl">
+  <div class="text-center w3-margin-top">
+    <h2>Raised Event</h2>
+  </div>
+  <table class="table table-striped table-bordered col-sm-12">
+    <tr>
+      <th>Event Id</th>
+      <th>Name</th>
+      <th>Raised Time</th>
+      <th>Even Time</th>
+      <th>Escalation Time</th>
+      <th>Current Number</th>
+      <th>Required Member</th>
+    </tr>
+    <tr ng-repeat="event in eventsRaised">
+      <td>{{event.id}}</td>
+      <td>{{event.eventName}}</td>
+      <td>{{event.raisedTime}}</td>
+      <td>{{event.eventTime}}</td>
+      <td>{{event.esclationTime}}</td>
+      <td>{{event.numberOfPanels}}</td>
+      <td>{{event.numberOfPanelsRequired}}</td>
+    </tr>
+  </table>
+</div>

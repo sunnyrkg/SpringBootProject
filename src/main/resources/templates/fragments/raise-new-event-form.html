@@ -1,0 +1,32 @@
+<div class="w3-margin-top" ng-controller="raiseNewEventForm" onload="loadRaiseNewEventApp()">
+  <form class="form-vertical" name="newEvent">
+    <div class="form-group">
+      <label for="eventName">Event Name</label>
+      <input type="text" name="eventName" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="eventTime">Event Date</label>
+      <input type="date" name="eventTime" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="escalationTime">Event Date</label>
+      <input type="date" name="escalationTime" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="panelRequired">Number Of Panel Required</label>
+      <input type="number" name="panelRequired" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="designationRequired">Designation Required</label>
+      <select name="designationRequired" class="form-control w3-padding-16">
+        <option ng-repeat="designation in allDesignations" value={{designation.designationId}}>{{designation.designationName}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="skillSetRequired">Skill Set Required</label>
+      <div ng-repeat="skill in allSkills">
+        <input  value="{{skill.Id}}" type="checkbox" name="skillSetRequired"/> <span>{{skill.skillName}}</span>
+      </div>    
+    </div>
+  </form>
+</div>

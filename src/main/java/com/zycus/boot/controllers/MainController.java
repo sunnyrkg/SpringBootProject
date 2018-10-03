@@ -76,7 +76,7 @@ public class MainController {
 			System.out.println("Authentication Successful");
 			User user = userService.getUserById(id);
 			loginService.setSessionFor(user, httpServletRequest.getSession());
-			model.put("user",user);
+			//model.put("user",user);
 			return new ModelAndView("redirect:dashboard");
 		}
 		else
@@ -104,6 +104,11 @@ public class MainController {
 			return new ModelAndView("error");
 		}
 		
+	}
+	@RequestMapping("/raise-new-event")
+	public ModelAndView raiseNewEvent()
+	{
+		return new ModelAndView("dashboard-user/raise-new-event");
 	}
 	public String moveToPage(String page)
 	{

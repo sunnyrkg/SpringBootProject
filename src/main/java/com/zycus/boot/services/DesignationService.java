@@ -32,4 +32,8 @@ public class DesignationService {
 		designation.setDepartment(department);
 		return designationRepository.save(designation);
 	}
+	public Iterable<Designation> getAll() {
+		// TODO Auto-generated method stub
+		return designationRepository.findAll();
+	}
 }

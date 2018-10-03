@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="include"></head>
+<body ng-app="myApp">
+    <section th:insert="fragments/header"/>
+    <!-- /#wrapper -->
+    <section th:insert="fragments/raise-new-event-form" class="col-sm-6 col-sm-push-3 w3-card-4 w3-white"/>
+    <div th:insert="@{scripts}"/>
+</body>
+</html>

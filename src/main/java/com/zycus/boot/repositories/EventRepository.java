@@ -34,5 +34,5 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
 	public Integer findNumberOfEventRaisedBy(@Param("raisedBy") User raisedBy);
 	
 	@Query("SELECT COUNT(e) FROM Event e WHERE e.raisedBy = :raisedBy AND e.eventStatus = :eventStatus")
-	public Integer findNumberOf(User raisedBy,EventStatus eventStatus);
+	public Integer findNumberOf(@Param("raisedBy")User raisedBy,@Param("eventStatus")EventStatus eventStatus);
 }
